@@ -143,7 +143,7 @@ public class Mito_Morph_Astro implements PlugIn {
                     for (Roi r : roiPts)
                         if (r.getName().contains(roiName)) {
                             roiPt = new PointRoi(r.getXBase() - roiPoly.getXBase(), r.getYBase() - roiPoly.getYBase());
-                            roiPt.setPosition(roiPoly.getZPosition());
+                            roiPt.setPosition(r.getPosition());
                             roiPt.setName(roiName);
                         }
                     if (roiPt == null) {

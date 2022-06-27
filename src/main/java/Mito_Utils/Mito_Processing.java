@@ -378,16 +378,14 @@ public class Mito_Processing {
         int dx = ((int)roiPt.getXBase() <= img.getWidth()/2) ? ((int)roiPt.getXBase()-img.getWidth()) : (int)roiPt.getXBase();
         int dy = ((int)roiPt.getYBase() <= img.getHeight()/2) ? ((int)roiPt.getYBase()-img.getHeight()) : (int)roiPt.getYBase();
         int dz = roiPt.getZPosition();
-        double maxEndRadius = Math.sqrt(dx*dx + dy*dy + dz*dz)*cal.pixelWidth;
-        img.setZ(roiPt.getZPosition() );
-        img.setRoi(shollCenter, true);
-        IJ.run("Legacy: Sholl Metrics & Options...", "spatial threshold center starting radius samples enclosing intersecting sum mean median skewness kurtosis "
-            + "centroid p10-p90 append=[] plots=[Only linear profile] background=0 preferred=[Fitted values] parallel="+n_cpus+" file=.csv decimal=3");
+        double maxEndRadius = (dx >= dy) ? dx : dy;
+        maxEndRadius = maxEndRadius*cal.pixelWidth;
+        img.setRoi(roiPt);
+        IJ.run(img,"Legacy: Sholl Metrics & Options...", "spatial center starting radius samples enclosing intersecting sum mean median "
+            + "centroid append=[] do_not_generate_detailed_table plots=[Only linear profile] background=0 preferred=[Fitted values] parallel="+n_cpus+" file=.csv decimal=3");
         img.setTitle(imgName+"_"+roiPt.getName());
-        img.show();
-        IJ.run(img, "Legacy: Sholl Analysis (From Image)...", "starting="+astroRad+" ending="+maxEndRadius+" radius_step="+shollStep+" #_samples=1 integration=Mean"
-                + "enclosing=1 #_primary=5 infer fit linear polynomial=[Best fitting degree] most normalizer=Volume save directory="+outDir+" do");    
-        img.hide();
+        IJ.run(img, "Legacy: Sholl Analysis (From Image)...", "starting="+astroRad+" ending="+maxEndRadius+" radius_step="+shollStep+" ignore"
+                + "enclosing=1 #_primary=1 infer fit linear polynomial=[Best fitting degree] most normalizer=Volume save directory="+outDir+" do");   
         WindowManager.getWindow("Sholl Results").dispose();
     }
 }

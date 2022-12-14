@@ -12,14 +12,14 @@
 
 3D images taken with a x60 objective
 
-1 channel: *Alexa Fluor 488:* GFP-marked mitochondrial network 
+*Alexa Fluor 488* channel: GFP-marked mitochondrial network 
   
 With each image should be provided a *.zip* file with the same name, containing a ROI surrounding each astrocyte + a point in the middle of each cell body.
 
 
 ### Plugin description
 
-* Detect mitochondria with DoG + Triangle threshold
+* Detect mitochondria with DoG + Triangle thresholding
 * Skeletonize mitochondria network to get the number of branches, their length, etc...
 
 

@@ -25,9 +25,8 @@ With each image should be provided a *.zip* file with the same name, containing 
 
 ### Dependencies
 
-*3DImageSuite** Fiji plugin
-
-*CLIJ** Fiji plugin
+* **3DImageSuite** Fiji plugin
+* **CLIJ** Fiji plugin
 
 
 ### Version history
